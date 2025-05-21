@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section id="home" class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-md-6">
+                <h1 class="display-4 fw-bold">See the World Clearly</h1>
+                <p class="lead">Premium eyewear for every occasion</p>
+                <a href="#contact" class="btn btn-primary btn-lg">Contact Us</a>
+            </div>
+            <div class="col-md-6">
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename='images/dmitry-mishin-KE_xElQyQhQ-unsplash.jpg') }}" 
+                         alt="Premium eyewear collection" class="hero-image">
+                    <div class="image-overlay">
+                        <h3>Shop Now</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="collections" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Our Collections</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="image-container">
+                        <img src="{{ url_for('static', filename='images/fernando-lavin-jT4zew8IENc-unsplash.jpg') }}" 
+                             class="product-image" alt="Prescription frames">
+                        <div class="image-overlay">
+                            <h4>Shop Prescription Frames</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Prescription Frames</h5>
+                        <p class="card-text">Stylish frames for every face shape</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="image-container">
+                        <img src="{{ url_for('static', filename='images/lensabl-0GfPlommtxM-unsplash.jpg') }}" 
+                             class="product-image" alt="Prescription lenses">
+                        <div class="image-overlay">
+                            <h4>Shop Prescription Lenses</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Prescription Lenses</h5>
+                        <p class="card-text">Precision crafted lenses for perfect vision</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="image-container">
+                        <img src="{{ url_for('static', filename='images/elache-motamedi-TLWDNRwN_sk-unsplash.jpg') }}" 
+                             class="product-image" alt="Sunglasses">
+                        <div class="image-overlay">
+                            <h4>Shop Sunglasses</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Sunglasses</h5>
+                        <p class="card-text">Premium sunglasses for every style</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="featured" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Featured Products</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="image-container">
+                        <img src="{{ url_for('static', filename='images/vitoandwilly-dx0Df9VJYfE-unsplash.jpg') }}" 
+                             class="featured-image" alt="Signature frames">
+                        <div class="image-overlay">
+                            <h4>Shop Signature Frames</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Signature Frames</h5>
+                        <p class="card-text">Our most popular frame collections</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="image-container">
+                        <img src="{{ url_for('static', filename='images/daniel-lincoln-SttmdhoyRlk-unsplash.jpg') }}" 
+                             class="featured-image" alt="Sports eyewear">
+                        <div class="image-overlay">
+                            <h4>Shop Sports Eyewear</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Sports Eyewear</h5>
+                        <p class="card-text">Sports performance eyewear</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="image-container">
+                        <img src="{{ url_for('static', filename='images/charlota-blunarova-V4pktt_0_mI-unsplash.jpg') }}" 
+                             class="featured-image" alt="Luxury eyewear">
+                        <div class="image-overlay">
+                            <h4>Shop Luxury Eyewear</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Luxury Eyewear</h5>
+                        <p class="card-text">Premium luxury eyewear collections</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Appointment Communication</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-4">Opt In for Appointment Reminders</h3>
+                        <p class="text-center mb-4">Stay connected with Eye4orce for important appointment reminders and updates via SMS.</p>
+                        <form method="POST" action="/">
+                            <div class="mb-3">
+                                <label for="phone_number" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone_number" name="phone_number" 
+                                       placeholder="Enter your phone number (e.g., +1234567890)" required>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                                    <label class="form-check-label" for="terms">
+                                        I agree to receive SMS updates from Eye4orce. Message and data rates may apply. 
+                                        Reply STOP to unsubscribe. Reply HELP for help. 
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms and Conditions</a>
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Opt In for Updates</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Terms and Conditions Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">SMS Terms and Conditions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Message and Data Rates May Apply</h6>
+                <p>Standard message and data rates may apply. Please check with your carrier for details.</p>
+
+                <h6>Opt-In Requirements</h6>
+                <p>To opt-in to receive SMS updates from Eye4orce, you must:</p>
+                <ul>
+                    <li>Be 18 years of age or older</li>
+                    <li>Provide a valid mobile phone number</li>
+                    <li>Agree to receive appointment-related messages from Eye4orce</li>
+                </ul>
+
+                <h6>Message Types</h6>
+                <p>You will receive SMS messages for the following appointment-related purposes:</p>
+                <ul>
+                    <li>Initial appointment confirmation</li>
+                    <li>24-hour appointment reminders</li>
+                    <li>2-hour appointment reminders</li>
+                    <li>Appointment cancellation instructions</li>
+                    <li>Rescheduling notifications</li>
+                    <li>Important updates about your appointment</li>
+                </ul>
+
+                <h6>Message Frequency</h6>
+                <p>While you may receive up to 4 messages per month about general updates, appointment-related messages will be sent as needed:</p>
+                <ul>
+                    <li>Up to 3 messages per appointment (confirmation, 24-hour reminder, 2-hour reminder)</li>
+                    <li>Additional messages may be sent for rescheduling or important updates</li>
+                    <li>Messages will be sent at appropriate times before your appointment</li>
+                </ul>
+
+                <h6>Opt-Out Instructions</h6>
+                <p>To unsubscribe from SMS messages at any time, simply reply with the word STOP to any message. You will then receive a confirmation message confirming your unsubscription.</p>
+                <p>Please note: Unsubscribing will prevent you from receiving important appointment reminders and updates. We recommend keeping your subscription active to ensure you don't miss your appointments.</p>
+
+                <h6>Help and Support</h6>
+                <p>To get help with SMS messages, reply with the word HELP to any message. You will receive instructions on how to manage your subscription.</p>
+                <p>For additional support, please contact us at <a href="mailto:support@eye4orce.com">support@eye4orce.com</a> or call our appointment line at (512) 266-2020.</p>
+
+                <h6>Important Notes</h6>
+                <p>By opting in, you acknowledge that:</p>
+                <ul>
+                    <li>Appointment-related messages are important for managing your care</li>
+                    <li>Message frequency may increase around appointment times</li>
+                    <li>Missing appointment reminders could result in missed appointments</li>
+                    <li>We reserve the right to send additional messages for important updates</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
