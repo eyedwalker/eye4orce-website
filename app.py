@@ -13,19 +13,16 @@ app = Flask(__name__,
     template_folder='templates',
     static_folder='static'
 )
-app.secret_key = os.getenv('SECRET_KEY', os.urandom(24))
-
-# Load environment variables
 load_dotenv()
+
+# Configure Flask app
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 # Initialize Twilio client
 twilio_client = Client(
     os.getenv('TWILIO_ACCOUNT_SID'),
     os.getenv('TWILIO_AUTH_TOKEN')
 )
-
-# Configure Flask app
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 # Initialize security
 Talisman(app)
@@ -34,20 +31,39 @@ CORS(app)
 # Add security headers
 @app.after_request
 def add_security_headers(response):
-    response.headers['X-Content-Type-Options'] = 'nosniff'
-    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
-    response.headers['X-XSS-Protection'] = '1; mode=block'
-    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
-    response.headers['Content-Security-Policy'] = """
-        default-src 'self';
-        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
-        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
-        img-src 'self' data:;
-        font-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
-        connect-src 'self' https://api.twilio.com;
-        frame-src 'self';
-    """
+    try:
+        # Add security headers
+        response.headers['X-Content-Type-Options'] = 'nosniff'
+        response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+        response.headers['X-XSS-Protection'] = '1; mode=block'
+        response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+        
+        # Add Content Security Policy
+        csp = """
+            default-src 'self';
+            script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
+            style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
+            img-src 'self' data:;
+            font-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
+            connect-src 'self' https://api.twilio.com;
+            frame-src 'self';
+        """
+        response.headers['Content-Security-Policy'] = csp
+        
+    except Exception as e:
+        print(f"Error adding security headers: {str(e)}")
+    
     return response
+
+# Error handler for 500 errors
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template('error.html', error="An internal error occurred. Please try again later."), 500
+
+# Error handler for 404 errors
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('error.html', error="Page not found."), 404
 
 class OptInForm(FlaskForm):
     phone_number = StringField('Phone Number', validators=[
@@ -140,4 +156,7 @@ def webhook():
     return '', 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=False)
+    try:
+        app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=False)
+    except Exception as e:
+        print(f"Error starting application: {str(e)}")
