@@ -3,6 +3,8 @@ from twilio.rest import Client
 from dotenv import load_dotenv
 import os
 from flask_wtf import FlaskForm
+from flask_talisman import Talisman
+from flask_cors import CORS
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, Regexp
 import re
@@ -21,6 +23,31 @@ twilio_client = Client(
     os.getenv('TWILIO_ACCOUNT_SID'),
     os.getenv('TWILIO_AUTH_TOKEN')
 )
+
+# Configure Flask app
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+
+# Initialize security
+Talisman(app)
+CORS(app)
+
+# Add security headers
+@app.after_request
+def add_security_headers(response):
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    response.headers['Content-Security-Policy'] = """
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
+        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
+        img-src 'self' data:;
+        font-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
+        connect-src 'self' https://api.twilio.com;
+        frame-src 'self';
+    """
+    return response
 
 class OptInForm(FlaskForm):
     phone_number = StringField('Phone Number', validators=[
