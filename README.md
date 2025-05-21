@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 # Eye4orce - Premium Eyewear Website
 
-A modern, responsive website for Eye4orce eyewear featuring Twilio messaging integration.
+A modern, responsive website for Eye4orce eyewear featuring Twilio messaging integration and other stuff.
 
 ## Features
 
