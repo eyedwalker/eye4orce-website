@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Eye4orce - Premium Eyewear Website
 
 A modern, responsive website for Eye4orce eyewear featuring Twilio messaging integration.
@@ -42,14 +43,6 @@ python app.py
 4. Deploy using your preferred platform (Heroku, Vercel, etc.)
 5. Configure Twilio webhook URLs in your environment variables
 
-## Project Structure
-
-- `/static` - Contains CSS, JavaScript, and image files
-- `/templates` - Contains HTML templates
-- `app.py` - Main Flask application
-- `requirements.txt` - Python dependencies
-- `.env` - Environment variables (create this file)
-
 ## Twilio Integration
 
 The website includes an A2P SMS opt-in/opt-out system that allows customers to subscribe for updates via SMS. When a customer submits their phone number, they will be added to your Twilio messaging list. Customers can:
@@ -60,14 +53,23 @@ The website includes an A2P SMS opt-in/opt-out system that allows customers to s
 
 The system is fully A2P compliant and includes proper opt-in/opt-out messaging.
 
+## Project Structure
+
+- `/static` - Contains CSS, JavaScript, and image files
+- `/templates` - Contains HTML templates
+- `app.py` - Main Flask application
+- `requirements.txt` - Python dependencies
+- `.env` - Environment variables (create this file)
+
 ## Customization
 
 To customize the website:
 1. Update the images in `/static/images`
-2. Modify the color scheme in `static/css/style.css`
-3. Update the content in `templates/index.html`
-4. Add your social media links in the footer
+2. Modify the CSS in `/static/css/style.css`
+3. Update the content in the templates
 
 ## License
 
 MIT License
+website
+>>>>>>> 8d5a71769f0d8b162d890727383fe785a818cc13
